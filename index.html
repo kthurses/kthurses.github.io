@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Revasa Anargya | Robotics Engineer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: rgba(20, 25, 45, 0.7);
+            --primary: #00f0ff;
+            --secondary: #b967ff;
+            --text: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+            background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                        linear-gradient(45deg, var(--primary), var(--secondary)) border-box;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(185, 103, 255, 0.8);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .headline {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .glow-bar {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+            width: 150px;
+            margin: 20px auto;
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin: 30px 0;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        section {
+            margin: 80px 0;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card .date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary);
+        }
+
+        /* Resume Button */
+        .resume-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #000;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 20px auto;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+            transition: all 0.3s;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(185, 103, 255, 0.6);
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(30, 35, 65, 0.6);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .project-card h4 {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .project-tech {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .headline {
+                font-size: 1.1rem;
+            }
+            .container {
+                padding: 20px;
+            }
+            section {
+                margin: 50px 0;
+            }
+            .profile-photo {
+                width: 130px;
+                height: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <header>
+            <!-- Replace # with your image URL (e.g., from Imgur or GitHub) -->
+            <img src="https://via.placeholder.com/400x400/1e1e2f/00f0ff?text=MR+A" alt="Muhammad Revasa Anargya" class="profile-photo">
+            <h1>Muhammad Revasa Anargya</h1>
+            <p class="headline">Mechatronics Engineering Student | Robotics Enthusiast | Future Innovator</p>
+            <div class="glow-bar"></div>
+            <p class="quote">“The more you learn, the less you know.”</p>
+            <!-- Replace "#" with link to your hosted resume PDF -->
+            <a href="#" class="resume-btn" download>📥 DOWNLOAD RESUME</a>
+        </header>
+
+        <section>
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>BRIDO WCT Robot</h4>
+                    <div class="project-tech">Fusion 360 · Mechanical Design · ABU ROBOCON</div>
+                    <p>Designed mechanical structure and transmission system for competition robot. Optimized for speed, accuracy, and reliability under tournament conditions.</p>
+                </div>
+                <div class="project-card">
+                    <h4>Code Optimization with IBM Granite</h4>
+                    <div class="project-tech">IBM Granite · AI Code Generation · Optimization</div>
+                    <p>Explored AI-assisted code generation and performance optimization techniques using IBM’s Granite models for embedded systems.</p>
+                </div>
+                <div class="project-card">
+                    <h4>Student Feedback System</h4>
+                    <div class="project-tech">Google Forms · Data Analysis · Reporting</div>
+                    <p>Built and managed digital feedback pipeline for BLM FTMM to collect, analyze, and report student academic concerns to faculty.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+
+            <div class="card">
+                <h3>Junior Mechanical Engineer for BRIDO WCT</h3>
+                <div class="date">Kombo Unair · Nov 2023 – Jul 2024 (9 months)</div>
+                <p>Designed and developed mechanical components for BRIDO WCT robot competing in ABU ROBOCON 2023. Collaborated in cross-functional engineering team to optimize performance and reliability.</p>
+            </div>
+
+            <div class="card">
+                <h3>Staff of Aspiration Division</h3>
+                <div class="date">BLM FTMM · Mar 2024 – Dec 2024 (10 months)</div>
+                <p>Facilitated student feedback and communication between faculty and student body. Organized forums and compiled reports to drive academic improvements.</p>
+            </div>
+
+            <div class="card">
+                <h3>Member</h3>
+                <div class="date">GDSC Universitas Airlangga · Sep 2023 – Jan 2025 (1 year 5 months)</div>
+                <p>Participated in developer community focused on Google technologies. Engaged in workshops, hackathons, and collaborative tech projects to enhance practical engineering and coding skills.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="card">
+                <h3>Bachelor of Engineering in Mechatronics, Robotics, and Automation Engineering</h3>
+                <div class="date">Universitas Airlangga · Started Aug 2023</div>
+                <p>Building expertise in integrated mechanical, electrical, and software systems for intelligent automation and robotics applications.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skills & Tools</h2>
+            <div class="skills-container">
+                <div class="skill-tag">Autodesk Fusion 360</div>
+                <div class="skill-tag">Autodesk Inventor</div>
+                <div class="skill-tag">Mechanical Manufacturing</div>
+                <div class="skill-tag">Code Generation & Optimization (IBM Granite)</div>
+                <div class="skill-tag">Robotics Systems</div>
+                <div class="skill-tag">Bahasa Indonesia (Native)</div>
+                <div class="skill-tag">English (Limited Working)</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <div class="card">
+                <div class="contact-info">
+                    <a href="tel:+6287709109099">📱 +62 877-0910-9099</a>
+                    <a href="mailto:revasa.anargya05@gmail.com">✉️ revasa.anargya05@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/muhammad-revasa-anargya-2b1456243/" target="_blank">🔗 linkedin.com/in/muhammad-revasa-anargya</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Designed with ❤️ for the future of robotics and automation | © 2025 Muhammad Revasa Anargya</p>
+    </footer>
+
+    <!-- Particles.js for Animated Background -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#00f0ff" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#b967ff",
+                        "opacity": 0.1,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" }
+                    },
+                    "modes": {
+                        "grab": { "distance": 140, "line_linked": { "opacity": 0.6 } },
+                        "push": { "particles_nb": 4 }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+</html>
