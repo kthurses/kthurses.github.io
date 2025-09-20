@@ -51,6 +51,49 @@
         });
     });
 </script>
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const form = e.target;
+        const button = document.getElementById('submitButton');
+        const successMsg = document.getElementById('successMessage');
+
+        // Disable button & show loading
+        button.disabled = true;
+        button.textContent = "Sending...";
+
+        // Send data via fetch
+        fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reset form
+                form.reset();
+                // Show success message
+                successMsg.classList.remove('d-none');
+                // Re-enable button
+                button.disabled = false;
+                button.textContent = "Submit";
+            } else {
+                // Show error
+                alert("Oops! There was a problem sending your message.");
+                button.disabled = false;
+                button.textContent = "Submit";
+            }
+        })
+        .catch(error => {
+            alert("Oops! There was a problem sending your message.");
+            button.disabled = false;
+            button.textContent = "Submit";
+        });
+    });
+</script>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
@@ -108,6 +151,10 @@
                                         <textarea class="form-control" id="message" name="message" type="text" placeholder="Enter your message here..." style="height: 10rem" required></textarea>
                                         <label for="message">Message</label>
                                     </div>
+                                    <!-- Submit Button -->
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
+                                    </div>
                                     <!-- Submit error message-->
                                     <!---->
                                     <!-- This is what your users will see when there is-->
@@ -117,6 +164,11 @@
                                     <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
                                     <input type="hidden" name="_replyto" value="revasa.anargya07@gmail.com">
                                 </form>
+                                <!-- Success Message (Hidden by Default) -->
+                                <div id="successMessage" class="alert alert-success d-none mt-4 text-center">
+                                    <h4>✅ Thank You!</h4>
+                                    <p>Your message has been sent successfully. I'll get back to you soon.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,10 +192,6 @@
         </footer>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
