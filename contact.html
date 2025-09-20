@@ -17,6 +17,40 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const button = document.getElementById('submitButton');
+        button.disabled = true;
+        button.textContent = "Sending...";
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                form.reset();
+                alert("Message sent successfully! I'll get back to you soon.");
+                button.disabled = false;
+                button.textContent = "Submit";
+            } else {
+                response.json().then(data => {
+                    alert("Oops! There was a problem sending your message.");
+                    button.disabled = false;
+                    button.textContent = "Submit";
+                });
+            }
+        }).catch(error => {
+            alert("Oops! There was a problem sending your message.");
+            button.disabled = false;
+            button.textContent = "Submit";
+        });
+    });
+</script>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
