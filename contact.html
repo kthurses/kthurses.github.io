@@ -163,12 +163,3 @@
         </script>
     </body>
 </html>
-``` 
-
-What I changed and why:
-- Removed the duplicate/early scripts in the head that tried to attach listeners before the DOM was ready (those caused the browser to fall back to the standard form submission and redirect to the Formspree page).
-- Removed the external SB Forms script so it doesn't override the custom behavior.
-- Added a single DOMContentLoaded-safe submit handler placed at the end of the page that prevents the default navigation, posts via fetch to your form action, and on success shows the visible successMessage with the exact "Thank you for reaching out!" text (and no redirect).
-
-Next steps:
-- If you still see a redirect, double-check that the form action is correct for your Formspree endpoint and that Formspree is returning a JSON success response (Formspree returns JSON for AJAX requests when Accept: application/json is set). If you want the message to be a modal or different styling I can change the markup quickly.
